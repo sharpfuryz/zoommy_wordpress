@@ -24,7 +24,7 @@ angular.module('zoommyApp', ['akoenig.deckgrid'])
                 )
     };
     $scope.saveToken = function(){
-      $http.get(('http://zoommyapp.com/api/v1/integration/check.json?token='+$scope.tokenModel)).
+      $http.get(('//zoommyapp.com/api/v1/integration/check.json?token='+$scope.tokenModel)).
         then(function(response) {
             $scope.storeToken();
           }, function(){
@@ -35,7 +35,7 @@ angular.module('zoommyApp', ['akoenig.deckgrid'])
       $scope.itemsList = [];
       $http({
           method: 'GET',
-          url: ('http://zoommyapp.com/api/v1/integration/favorites.json?token='+$scope.tokenModel)
+          url: ('//zoommyapp.com/api/v1/integration/favorites.json?token='+$scope.tokenModel)
       }).success(function(data) {
           $scope.itemsList = data.integration; ///data.items;
           $scope.isLoading = false;
