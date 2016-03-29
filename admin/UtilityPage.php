@@ -61,27 +61,36 @@ class UtilityPage
             <div ng-controller="imagesController" data-ng-init="init()">
             <div class="token_window" ng-show="isTokenStored == false">
               <div class="wrap">
-                <h2>Access token</h2>
+                <h2>Sign in into account</h2>
                 <table class="form-table">
                   <tbody>
                     <tr>
-                      <th scope="row"><label for="token">Zoommy wordpress token</label></th>
+                      <th scope="row"><label for="email">Email:</label></th>
                       <td>
-                        <input name="token" type="text" ng-model="tokenModel" id="token" class="regular-text">
-                        <p class="description" id="tagline-description">You can one at <a href="http://zoommyapp.com" target="_blank">account page</a></p>
+                        <input name="email" type="email" ng-model="accountEmail" id="account_email" class="regular-text">
+                      </td>
+                    </tr>
+                    <tr>
+                      <th scope="row"><label for="password">Password</label></th>
+                      <td>
+                        <input name="password" type="password" ng-model="accountPassword" id="account_password" class="regular-text">
                       </td>
                     </tr>
                   </tbody>
                 </table>
                 <p class="submit">
-                  <button class="button button-primary" ng-click="saveToken()">Save</button>
+                  <button class="button button-primary" ng-click="loginToAccount()">Sign in</button>
                 </p>
             </div>
             </div>
             <div class="images_window" ng-hide="isTokenStored == false" ng-class="isLoading ? 'loading' : ''">
+              <div style="display: block;margin: 10px auto;padding-left: 5px;">
+                <span class="nav_item" ng-click="getItems()" ng-class="{active: (selectedMode == 'favorites')}">Favorites <small>{{favoritesSize}}</small></span>
+                <span class="nav_item" ng-repeat="c in collectionsList" ng-click="selectCollection(c)" ng-class="{active: (selectedCollectionId == c.id)}">{{c.title}}<small>{{c.items_count}}</small></span>
+              </div>
               <div deckgrid source="itemsList" class="deckgrid">
                   <div class="a-card" ng-class="card.loading ? 'loading' : ''">
-                      <img width="{{card.preview_width}}" height="{{card.preview_height}}" style="background-color: {{card.primary_color}}" src="data:image/jpg;base64,{{card.base64}}" alt="{{card.description}}" data-ng-click="mother.selectItem(card)">
+                      <img width="{{card.preview_width}}" height="{{card.preview_height}}" style="background-color: {{card.primary_color}}" src="{{card.preview_url}}" alt="{{card.description}}" data-ng-click="mother.selectItem(card)">
                   </div>
               </div>
             </div>
